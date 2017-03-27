@@ -16,11 +16,13 @@
             </div>
         </div>
     </div>
+    <?php /*
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <calendar></calendar>
         </div>
     </div>
+    */ ?>
 </div>
 @endsection
 
