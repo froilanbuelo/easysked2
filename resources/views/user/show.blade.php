@@ -15,7 +15,11 @@
                             </div>
                             <div class="panel-body">
                                 <div>{{$appointment->description}}</div>
-                                <div class="pull-right text-danger">{{$appointment->hours}} {{str_plural('hour',$appointment->hours)}} {{$appointment->minutes}} minutes</div>
+                                <div class="pull-right text-danger">
+                                @if($appointment->hours > 0)
+                                    {{$appointment->hours}} {{str_plural('hour',$appointment->hours)}} 
+                                @endif
+                                {{$appointment->minutes}} minutes</div>
                             </div>
                         </div>
                         @endforeach

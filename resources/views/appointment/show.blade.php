@@ -8,7 +8,11 @@
                 <div class="panel-heading"><h3>{{$appointment->user->name}}</h3><h4>{{ $appointment->name}}</h4></div>
                 <div class="panel-body">
                     <div>{{$appointment->description}}</div>
-                    <div class="pull-right text-danger">{{$appointment->hours}} {{str_plural('hour',$appointment->hours)}} {{$appointment->minutes}} minutes</div>
+                    <div class="pull-right text-danger">
+                    @if($appointment->hours > 0)
+                        {{$appointment->hours}} {{str_plural('hour',$appointment->hours)}} 
+                    @endif
+                    {{$appointment->minutes}} minutes</div>
                     @foreach($appointment->schedules as $schedule)
                         <div></div>
                     @endforeach

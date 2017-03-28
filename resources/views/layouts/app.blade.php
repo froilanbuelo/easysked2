@@ -79,6 +79,10 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            @include('partials.alert')
+        </div>
+        
 
         @yield('content')
         

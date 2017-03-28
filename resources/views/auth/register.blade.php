@@ -65,6 +65,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                                <a class="btn btn-default" href="{{ route('google_login') }}">
+                                    or Register with Google
+                                </a>
                             </div>
                         </div>
                     </form>

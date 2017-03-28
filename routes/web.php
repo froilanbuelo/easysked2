@@ -18,5 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/google_login', 'GoogleAuthController@login')->name('google_login');
 Route::resource('user', 'UserController');
 Route::resource('appointment', 'AppointmentController');
