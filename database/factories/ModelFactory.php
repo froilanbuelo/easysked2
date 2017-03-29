@@ -20,6 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'timezone' => $faker->timezone,
     ];
 });
 $factory->define(App\Appointment::class, function (Faker\Generator $faker) {
@@ -43,5 +44,36 @@ $factory->define(App\Schedule::class, function (Faker\Generator $faker) {
         'end_time' => $faker->randomElement($array = array ('15:00:00','17:00:00')),
         'appointment_id' => App\Appointment::all()->random()->id,
         'day' => $faker->dayOfWeek(),
+    ];
+});
+$factory->define(App\Calendar::class, function (Faker\Generator $faker) {
+    return [
+        'timezone' => $faker->timezone,
+        'sync_token' => NULL,
+        'title' => 'Primary Calendar',
+        'google_calendar_id' => 'primary',
+        'user_id' => App\User::all()->random()->id,
+    ];
+});
+$factory->define(App\Event::class, function (Faker\Generator $faker) {
+    $start = Carbon\Carbon::instance($faker->dateTimeThisMonth);
+    $start->minute($faker->randomElement($array = array (0,15,30,45)));
+    $start->second = 0;
+    $end = $start->copy()->addMinutes($faker->randomElement($array = array (15,30,60,90,180)));
+    return [
+        'start' => $start,
+        'end' => $end,
+        'title' => $faker->sentence,
+        'location' => $faker->streetAddress,
+        'appointment_id' => App\Appointment::all()->random()->id,
+        'calendar_id' => App\Calendar::all()->random()->id,
+    ];
+});
+$factory->define(App\Invitee::class, function (Faker\Generator $faker) {
+    return [
+        'display_name' => $faker->name,
+        'email' => $faker->email,
+        'user_id' => NULL,
+        'event_id' => App\Event::all()->random()->id,
     ];
 });

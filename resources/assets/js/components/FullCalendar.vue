@@ -9,24 +9,47 @@ export default {
     props: [], //alll the props
     data() {
         return {
-            //all the data
+            events: [],
+            errors: []
         }
     },
     mounted() {
+        // var self = this;
+        // Vue.nextTick(function() {
+        //     $('#calendar').fullCalendar({
+        //         defaultView: 'agendaWeek',
+        //         editable: true,
+        //         events: self.events
+        //     });
+        // });
+    },
+    created() {
         var self = this;
-        Vue.nextTick(function() {
-            $('#calendar').fullCalendar({
-                defaultView: 'agendaWeek',
-                editable: true,
-                events: [
-                    {
-                        start: '2017-03-27T10:00:00',
-                        end: '2017-03-27T16:00:00',
-                        rendering: 'background'
-                    }
-                ]
+        axios.get('http://easysked.dev/event_list')
+        .then(response => {
+            console.log(response.data.data);
+            // JSON responses are automatically parsed.
+            self.events = response.data.data
+            Vue.nextTick(function() {
+                $('#calendar').fullCalendar({
+                    defaultView: 'agendaWeek',
+                    editable: true,
+                    events: self.events
+                });
             });
-        });
+        })
+        .catch(e => {
+          self.errors.push(e)
+        })
+
+        // async / await version (created() becomes async created())
+        //
+        // try {
+        //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
+        //   this.posts = response.data
+        // } catch (e) {
+        //   this.errors.push(e)
+        // }
     }
 }
 </script>

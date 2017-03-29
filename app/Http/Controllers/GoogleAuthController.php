@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use App\Calendar;
 use App\Googl;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class GoogleAuthController extends Controller
@@ -37,13 +38,13 @@ class GoogleAuthController extends Controller
                 $user->save();
                 $user_id = $user->id;
 
-                // //create primary calendar
-                // $calendar = new Calendar;
-                // $calendar->user_id = $user_id;
-                // $calendar->title = 'Primary Calendar';
-                // $calendar->calendar_id = 'primary';
-                // $calendar->sync_token = '';
-                // $calendar->save();
+                //create primary calendar
+                $calendar = new Calendar;
+                $calendar->user_id = $user_id;
+                $calendar->title = 'Primary Calendar';
+                $calendar->google_calendar_id = 'primary';
+                $calendar->sync_token = '';
+                $calendar->save();
             } else {
                 $user_id = $has_user->id;
             }

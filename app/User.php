@@ -29,6 +29,13 @@ class User extends Authenticatable
     public function appointments(){
         return $this->hasMany('App\Appointment');
     }
+    public function calendars(){
+        return $this->hasMany('App\Calendar');
+    }
+    public function events()
+    {
+        return $this->hasManyThrough('App\Event', 'App\Calendar');
+    }
     // public function getRouteKeyName(){
     //     return 'username';
     // }

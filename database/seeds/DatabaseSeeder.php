@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
         factory(App\User::class, 50)->create()->each(function ($u) {
             $u->appointments()->save(factory(App\Appointment::class)->make());
         });
-        //$this->call(AppointmentSeeder::class);
+        $this->call(AppointmentSeeder::class);
+        $this->call(ScheduleTableSeeder::class);
+        $this->call(CalendarTableSeeder::class);
+        $this->call(EventTableSeeder::class);
+        $this->call(InviteeTableSeeder::class);
     }
 }

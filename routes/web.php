@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('event_list', 'Api\EventController@index');
+
+Route::get('/home/{view?}', 'HomeController@index');
+// Route::get('/home_calendar', 'HomeController@index',['view'=>'calendar']);
 Route::get('/google_login', 'GoogleAuthController@login')->name('google_login');
 Route::resource('user', 'UserController');
 Route::resource('appointment', 'AppointmentController');

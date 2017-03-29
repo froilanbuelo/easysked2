@@ -27764,22 +27764,45 @@ __webpack_require__(154);
     props: [], //alll the props
     data: function data() {
         return {
-            //all the data
+            events: [],
+            errors: []
         };
     },
     mounted: function mounted() {
+        // var self = this;
+        // Vue.nextTick(function() {
+        //     $('#calendar').fullCalendar({
+        //         defaultView: 'agendaWeek',
+        //         editable: true,
+        //         events: self.events
+        //     });
+        // });
+    },
+    created: function created() {
         var self = this;
-        Vue.nextTick(function () {
-            $('#calendar').fullCalendar({
-                defaultView: 'agendaWeek',
-                editable: true,
-                events: [{
-                    start: '2017-03-27T10:00:00',
-                    end: '2017-03-27T16:00:00',
-                    rendering: 'background'
-                }]
+        axios.get('http://easysked.dev/event_list').then(function (response) {
+            console.log(response.data.data);
+            // JSON responses are automatically parsed.
+            self.events = response.data.data;
+            Vue.nextTick(function () {
+                $('#calendar').fullCalendar({
+                    defaultView: 'agendaWeek',
+                    editable: true,
+                    events: self.events
+                });
             });
+        }).catch(function (e) {
+            self.errors.push(e);
         });
+
+        // async / await version (created() becomes async created())
+        //
+        // try {
+        //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
+        //   this.posts = response.data
+        // } catch (e) {
+        //   this.errors.push(e)
+        // }
     }
 });
 
@@ -62901,7 +62924,7 @@ var Component = __webpack_require__(125)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/froilanbuelo/Sites/easysked/resources/assets/js/components/Example.vue"
+Component.options.__file = "/Users/webgroup/Sites/easysked/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -62939,7 +62962,7 @@ var Component = __webpack_require__(125)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/froilanbuelo/Sites/easysked/resources/assets/js/components/FullCalendar.vue"
+Component.options.__file = "/Users/webgroup/Sites/easysked/resources/assets/js/components/FullCalendar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FullCalendar.vue: functional components are not supported with templates, they should use render functions.")}
 

@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3>Sked Dashboard</h3>
-                    <u class="text-undeline">List</u> | <a href="{{url('home/calendar')}}">Calendar</a>
+                    <a href="{{url('home')}}">List</a> | <u>Calendar</u>
                 </div>
                 <div class="panel-body">
                     @if (count($events) > 0 )
@@ -25,6 +25,11 @@
                     @endif
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <calendar></calendar>
         </div>
     </div>
 </div>
